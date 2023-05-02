@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import List
 
 from fastapi import FastAPI
@@ -16,6 +17,13 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
+class Status(Enum):
+    completed = "completed"
+    pending = "pending"
+    canceled = "canceled"
+    all = "all"
+
+
 class Order(BaseModel):
     id: PositiveInt
     item: str
@@ -25,5 +33,5 @@ class Order(BaseModel):
 
 
 @app.post("solution", tags=["App"])
-async def process_orders(orders: List[Order], criterion):
+async def process_orders(orders: List[Order], criterion: Status):
     pass
