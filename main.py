@@ -37,4 +37,8 @@ async def say_hello(name: str):
 
 @app.post("solution", tags=["App"])
 async def process_orders(orders: List[Order], criterion: Status)-> LIST_ORDER_STATUS:
-    pass
+    filtered_orders = []
+    for order in orders:
+        if (order.status == criterion) or (criterion == Status.all):
+            filtered_orders.append(order)
+    return {"orders": filtered_orders, "criterion": criterion}
