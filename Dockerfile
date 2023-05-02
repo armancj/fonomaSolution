@@ -7,7 +7,7 @@ RUN apt-get update && \
     rm -rf /var/cache/apt/*
 
 RUN pip install -U pip && \
-    pip install --no-cache-dir -r /tmp/requirements/base.txt
+    pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY . .
 
