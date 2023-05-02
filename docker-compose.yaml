@@ -1,13 +1,14 @@
 version: '3.8'
 services:
-  #app:
-    #container_name: app
-    #image: app_image
-    #restart: always
-    #build:
-     #   context: .
-      ##  dockerfile: Dockerfile
-    ##   - "80:80"
+  app:
+    container_name: app
+    image: app_image
+    restart: always
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
 
   app_redis:
     image: redis:latest
