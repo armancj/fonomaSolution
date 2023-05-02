@@ -1,4 +1,4 @@
-from typing import List, Dict, Any
+from typing import List
 from aiocache import cached, RedisCache
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
