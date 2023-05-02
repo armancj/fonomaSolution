@@ -4,18 +4,6 @@ from typing import List
 from fastapi import FastAPI
 from pydantic import BaseModel, PositiveInt, PositiveFloat
 
-app = FastAPI()
-
-
-@app.get("/", tags=["App"])
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}", tags=["App"])
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
-
 
 class Status(Enum):
     completed = "completed"
@@ -32,6 +20,21 @@ class Order(BaseModel):
     status: Status = Status.all
 
 
+LIST_ORDER_STATUS = dict[str, list[Order] | Status]
+
+app = FastAPI()
+
+
+@app.get("/", tags=["App"])
+async def root():
+    return {"message": "Hello World"}
+
+
+@app.get("/hello/{name}", tags=["App"])
+async def say_hello(name: str):
+    return {"message": f"Hello {name}"}
+
+
 @app.post("solution", tags=["App"])
-async def process_orders(orders: List[Order], criterion: Status):
+async def process_orders(orders: List[Order], criterion: Status)-> LIST_ORDER_STATUS:
     pass
