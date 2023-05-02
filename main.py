@@ -1,4 +1,7 @@
+from typing import List
+
 from fastapi import FastAPI
+from pydantic import BaseModel, PositiveInt, PositiveFloat
 
 app = FastAPI()
 
@@ -13,6 +16,14 @@ async def say_hello(name: str):
     return {"message": f"Hello {name}"}
 
 
+class Order(BaseModel):
+    id: PositiveInt
+    item: str
+    quantity: PositiveInt
+    price: PositiveFloat
+    status: Status = Status.all
+
+
 @app.post("solution", tags=["App"])
-async def process_orders(orders, criterion):
+async def process_orders(orders: List[Order], criterion):
     pass
