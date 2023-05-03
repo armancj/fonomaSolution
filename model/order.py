@@ -21,6 +21,3 @@ class Order(BaseModel):
 class OrdersResponse(BaseModel):
     orders: List[Order]
     criterion: Status
-
-
-#LIST_ORDERS = dict[str, list[Order] | Status]
