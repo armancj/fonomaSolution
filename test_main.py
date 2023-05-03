@@ -1,6 +1,5 @@
 import unittest
 
-import pytest
 from fastapi.testclient import TestClient
 
 from main import app
@@ -17,17 +16,15 @@ orders = [
 ]
 
 
-class MyTestCase(pytest.TestCase):
+class MyTestCase(unittest.TestCase):
 
     @staticmethod
-    @pytest.mark.asyncio
     def test_read_root():
         response = client.get("/")
         assert response.status_code == 200
         assert response.json() == {"message": "Hello World"}  # add assertion here# add assertion here
 
     @staticmethod
-    @pytest.mark.asyncio
     def test_read_say_hello():
         name = "test"
         response = client.get(f"/hello/{name}")
@@ -35,7 +32,6 @@ class MyTestCase(pytest.TestCase):
         assert response.json() == {"message": f"Hello {name}"}
 
     @staticmethod
-    @pytest.mark.asyncio
     def test_process_orders():
         url = "/solution/?criterion=completed"
         response = client.post(url, json=orders)
@@ -44,4 +40,4 @@ class MyTestCase(pytest.TestCase):
 
 
 if __name__ == '__main__':
-    pytest.main()
+    unittest.main()

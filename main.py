@@ -2,6 +2,7 @@ from typing import List
 from aiocache import cached, RedisCache
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import PositiveFloat
 
 from model.order import Order, Status, OrdersResponse
 
@@ -29,7 +30,7 @@ async def say_hello(name: str):
 
 
 @cached(cache, key_builder="solution")
-@app.post("/solution", tags=["Solution"])
+@app.post("/solution", tags=["Solution"], response_model=PositiveFloat)
 async def process_orders(orders: List[Order], criterion: Status):
     suma = sum(order.price for order in orders if (order.status == criterion) or (criterion == Status.all))
     return suma
