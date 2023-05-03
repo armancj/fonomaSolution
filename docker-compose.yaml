@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-    #restart: always
   app:
+    restart: always
     build:
         context: .
         dockerfile: Dockerfile
