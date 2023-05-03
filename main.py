@@ -3,7 +3,7 @@ from aiocache import cached, RedisCache
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from model.order import Order, Status, LIST_ORDERS, OrdersResponse
+from model.order import Order, Status, OrdersResponse
 
 app = FastAPI()
 
@@ -30,7 +30,7 @@ async def say_hello(name: str):
 
 @cached(cache, key_builder="solution")
 @app.post("/solution", tags=["Solution"], response_model=OrdersResponse)
-async def process_orders(orders: List[Order], criterion: Status) -> LIST_ORDERS:
+async def process_orders(orders: List[Order], criterion: Status):
     filtered_orders = []
     for order in orders:
         if (order.status == criterion) or (criterion == Status.all):
